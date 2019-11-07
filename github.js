@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer');
 
 const BASE_URL = "https://github.com/login";
 
+// Changer la valeur pour chercher un autre terme
 const Recherche = "john";
 
 const mongoose = require('mongoose');
@@ -65,12 +66,6 @@ const github = {
             }) 
             urls = urls.concat(newUrls)
             everything = everything.concat(urls);
-        
-           /* let nombrePost = 10;
-           for(let j=0; j<nombrePost; j++){
-            console.log("Profil n°"+j+" de la page n°"+i+" scrappé");
-            users = await github.page.evaluate(() =>[...document.querySelectorAll('.user-list > .user-list-item .text-normal > a:first-of-type').innerText])
-           }*/
 
             await github.page.waitFor(2000);
             await github.page.click('a.next_page');
@@ -102,7 +97,7 @@ const github = {
           for(let k = 0; k<everything.length; k++){
             
             new Utilisateur(everything[k]).save(function (err, users) {
-                if (err) return console.error(err); // #sadpanda
+                if (err) return console.error(err);
                 console.log(users);
             });
           }
